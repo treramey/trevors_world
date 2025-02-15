@@ -1,10 +1,5 @@
 @import 'tailwindcss';
 
-::selection {
-  background-color: #47a3f3;
-  color: #fefefe;
-}
-
 :root {
   --sh-class: #2d5e9d;
   --sh-identifier: #354150;
@@ -17,6 +12,15 @@
   --sh-entity: #e25a1c;
 }
 
+@theme {
+  --color-primary-100: #faf4ed;
+  --font-nb-architect: var(--font-nb-architect);
+  --font-nb-architect-neue: var(--font-nb-architect-neue);
+  --font-mondwest: var(--font-mondwest);
+  --font-neuebit: var(--font-neuebit);
+  --font-inter: var(--font-inter);
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --sh-class: #4c97f8;
@@ -24,13 +28,86 @@
     --sh-keyword: #f47067;
     --sh-string: #0fa295;
   }
-  html {
-    color-scheme: dark;
-  }
 }
 
 html {
+  color-scheme: light;
+}
+
+
+:root html {
   min-width: 360px;
+}
+
+p,
+ul {
+  text-wrap: pretty;
+  color: var(--text-primary);
+  line-height: 1.7em;
+  letter-spacing: -.015em;
+  margin-top: 0;
+  margin-bottom: 1.5rem
+}
+
+@utility grid-parent {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: .5rem;
+  padding: .25rem
+}
+
+@media (min-width: 768px) {
+  .grid-parent {
+    padding: 1rem
+  }
+}
+
+@utility grid-child {
+  grid-column: span 6 / span 6
+}
+
+@utility grid-child-center {
+  grid-column: span 12 / span 12
+}
+
+@utility grid-child-right {
+  grid-column: span 6 / span 6
+}
+
+@utility grid-child-left {
+  grid-column: 1 / -1
+}
+
+@media (min-width: 1024px) {
+  .grid-child-right {
+    grid-column: span 3 / span 3
+  }
+}
+
+@media (min-width: 768px) {
+  .grid-child-left {
+    grid-column-start: 2
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-child-left {
+    grid-column: span 3 / span 3
+  }
+}
+
+@media (min-width: 768px) {
+  .grid-child-center {
+    grid-column: span 10 / span 10;
+    grid-column-start: 2
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-child-center {
+    grid-column: span 6 / span 6;
+    grid-column-start: 4
+  }
 }
 
 .prose .anchor {
@@ -56,7 +133,7 @@ html {
   content: '#';
 }
 
-.prose *:hover > .anchor {
+.prose *:hover>.anchor {
   @apply visible;
 }
 
@@ -115,7 +192,7 @@ html {
   @apply list-decimal pl-6;
 }
 
-.prose > :first-child {
+.prose> :first-child {
   /* Override removing top margin, causing layout shift */
   margin-top: 1.25em !important;
   margin-bottom: 1.25em !important;
@@ -126,8 +203,10 @@ pre::-webkit-scrollbar {
 }
 
 pre {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 /* Remove Safari input shadow on mobile */
@@ -147,4 +226,10 @@ table {
 
 .title {
   text-wrap: balance;
+}
+
+.crt-line {
+  background-image: url(/crt-line.svg);
+  background-size: 4px 4px;
+  background-repeat: repeat;
 }
