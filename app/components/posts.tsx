@@ -7,7 +7,9 @@ export function BlogPosts() {
 
 	return (
 		<div className="grid-parent">
-			<div className="text-xl grid-child-left font-mondwest">blog</div>
+			<div className="text-2xl sm:text-xl grid-child-left font-mondwest">
+				blog
+			</div>
 			{allBlogs
 				.sort((a, b) => {
 					if (
