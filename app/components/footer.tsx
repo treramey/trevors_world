@@ -18,7 +18,7 @@ function ArrowIcon() {
 export default function Footer() {
 	return (
 		<footer className="relative z-10 grid-parent">
-			<div className="grid-child-left font-nb-architect"></div>
+			<p className="grid-child-left font-nb-architect"></p>
 			<ul className="flex flex-col gap-2 mt-4 lg:mt-0 grid-child-center text-neutral-800">
 				<li>
 					<a
