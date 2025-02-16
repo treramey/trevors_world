@@ -1,12 +1,12 @@
-import { BlogPosts } from "app/components/posts";
+import { LatestThreeBlogPosts } from "app/components/posts";
 
 export default function Page() {
 	return (
 		<>
 			<section className="grid-parent">
 				<div className="grid-child-center">
-					<div className="flex justify-center items-center h-48 text-stone-800 sm:h-[25rem]">
-						<h1 className="text-7xl sm:text-8xl font-mondwest">Trevor</h1>
+					<div className="flex justify-center items-center h-48 !text-stone-800 sm:h-[25rem]">
+						<h1 className="text-6xl sm:text-7xl font-mondwest">Trevor</h1>
 					</div>
 					<p className="text-pretty">
 						Hello! I'm Trevor — a software designer building tools for the web.
@@ -20,7 +20,7 @@ export default function Page() {
 					</p>
 				</div>
 			</section>
-			<BlogPosts />
+			<LatestThreeBlogPosts />
 		</>
 	);
 }

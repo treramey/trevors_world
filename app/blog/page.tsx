@@ -1,4 +1,4 @@
-import { BlogPosts } from "app/components/posts";
+import { ListAllBlogPosts } from "app/components/posts";
 
 export const metadata = {
 	title: "Blog",
@@ -9,10 +9,10 @@ export default function Page() {
 	return (
 		<section className="grid-parent">
 			<div className="grid-child-center">
-				<h1 className="mb-8 text-2xl font-semibold tracking-tighter">
-					My Blog
-				</h1>
-				<BlogPosts />
+				<div className="flex justify-center items-center h-48 !text-stone-800 sm:h-[25rem]">
+					<h1 className="text-6xl sm:text-7xl font-mondwest">The Garden</h1>
+				</div>
+				<ListAllBlogPosts />
 			</div>
 		</section>
 	);
