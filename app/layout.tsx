@@ -7,6 +7,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "./components/footer";
 import { baseUrl } from "./sitemap";
 import localFont from "next/font/local";
+import { MouseClick } from "./components/click";
+import { Suspense } from "react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -122,7 +124,7 @@ export default function RootLayout({
           nbArchitectNeue.variable,
           neueBit.variable,
           mondwest.variable,
-          "bg-primary-100 text-gray-950",
+          "bg-primary-100 text-gray-950 ",
         )}
       >
         <main className="flex relative flex-col min-h-screen antialiased tracking-wide cursor-default selection:bg-gray-600/30">
@@ -135,8 +137,11 @@ export default function RootLayout({
           </div>
           <Analytics />
           <SpeedInsights />
-          <div className="fixed inset-0 z-50 w-full h-screen opacity-30 pointer-events-none mix-blend-overlay crt-line"></div>
-          <div className="absolute inset-x-0 bottom-0 z-0 w-full bg-repeat-x sm:opacity-60 h-[8rem] bg-[length:10px_240px] bg-[url('/bg-gradient.svg')] pointer-events-none"></div>
+          <div className="fixed inset-0 z-50 w-full h-screen opacity-30 pointer-events-none mix-blend-overlay crt-line" />
+          <div className="absolute inset-x-0 bottom-0 z-0 w-full bg-repeat-x sm:opacity-70 h-[8rem] bg-[length:10px_240px] bg-[url('/bg-gradient.svg')] pointer-events-none" />
+          <Suspense fallback={null}>
+            <MouseClick />
+          </Suspense>
         </main>
       </body>
     </html>
