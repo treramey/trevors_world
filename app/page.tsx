@@ -24,8 +24,8 @@ export default function Page() {
             <span className="blue-link">
               <Link href="https://www.fluencyforge.com/">Fluency Forge</Link>
             </span>
-            and always making something. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua
+            &nbsp;and always making something. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua
           </p>
           <RetroCard>
             <div className="flex-1 py-4 pr-4 pl-2 text-white sm:py-5 sm:pr-5 overflow-x-none bg-neutral-900">
