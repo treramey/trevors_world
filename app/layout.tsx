@@ -83,15 +83,15 @@ const neueBit = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "Next.js Portfolio Starter",
-    template: "%s | Next.js Portfolio Starter",
+    default: "Trevor's world",
+    template: "%s | Trevor's world",
   },
   description: "This is my portfolio.",
   openGraph: {
-    title: "My Portfolio",
+    title: "Trevor's world",
     description: "This is my portfolio.",
     url: baseUrl,
-    siteName: "My Portfolio",
+    siteName: "Trevor's world",
     locale: "en_US",
     type: "website",
   },

@@ -4,6 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { highlight } from "sugar-high";
 import { RetroCard } from "./retroCard";
+import { CodeBlock } from "./code-block";
 
 function Table({ data }) {
   // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
@@ -51,13 +52,15 @@ function RoundedImage(props) {
 }
 
 function Code({ children, ...props }) {
-  const codeHTML = highlight(children);
+  // const codeHTML = highlight(children);
+  // const codeWithLineNumbers = codeHTML
+  //   .split("\n")
+  //   .map((line) => `<span class="line">${line}</span>`)
+  //   .join("\n");
 
   return (
     <RetroCard>
-      <div className="overflow-x-auto flex-1 py-4 pr-4 pl-2 text-sm sm:py-5 sm:pr-5 bg-neutral-900">
-        <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />
-      </div>
+      <CodeBlock code={children} title={props.className ? props.className.replace("language-", "") : ""} {...props} />
     </RetroCard>
   );
 }

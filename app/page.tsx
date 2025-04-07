@@ -1,5 +1,8 @@
 import { LatestThreeBlogPosts } from "app/components/posts";
 import { RetroCard } from "./components/retroCard";
+import { CodeBlock } from "./components/code-block";
+
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Page() {
@@ -25,21 +28,22 @@ export default function Page() {
               <Link href="https://www.fluencyforge.com/">Fluency Forge</Link>
             </span>
             &nbsp;and always making something. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua
+            tempor incididunt ut labore et dolore magna aliqua.
           </p>
+          <p>Some of the technologies I've been working with. </p>
+          <div className="flex justify-center mb-6 space-x-2">
+            <Image width={64} height={64} alt="Csharp pixel logo" src="/csharp_pixel.png" />
+            <Image width={64} height={64} alt="Csharp pixel logo" src="/react_pixel.png" />
+            <Image width={64} height={64} alt="Csharp pixel logo" src="/tailwind_pixel.png" />
+            <Image width={64} height={64} alt="Csharp pixel logo" src="/typescript_pixel.png" />
+            <Image width={64} height={64} alt="Csharp pixel logo" src="/nextjs_pixel.png" />
+            <Image width={64} height={64} alt="Csharp pixel logo" src="/tanstack_pixel.png" />
+          </div>
+          <p>Here's what I've been up to nowadays.</p>
           <RetroCard>
-            <div className="flex-1 py-4 pr-4 pl-2 text-white sm:py-5 sm:pr-5 overflow-x-none bg-neutral-900">
-              <pre>
-                <code>
-                  <div>let location = 'Frisco, TX'</div>
-                  <div>let hobbies = [</div>
-                  <div> 'Building',</div>
-                  <div> 'Designing',</div>
-                  <div> 'Traveling',</div>
-                  <div>]</div>
-                </code>
-              </pre>
-            </div>
+            <CodeBlock
+              code={`let location = 'Frisco, TX'\nlet hobbies = [\n  'Building',\n  'Designing',\n  'Traveling',\n]`}
+            />
           </RetroCard>
         </div>
       </section>
