@@ -54,8 +54,13 @@ export default async function Blog(props) {
   }
 
   return (
-    <section className="grid-parent">
-      <div className="grid-child-center">
+    <>
+      <section className="grid-parent">
+        <div className="grid-child-center">
+          <TitleSection title={post.metadata.title} publishedAt={post.metadata.publishedAt} />
+        </div>
+      </section>
+      <section className="grid-parent prose">
         <script
           type="application/ld+json"
           suppressHydrationWarning
@@ -78,14 +83,35 @@ export default async function Blog(props) {
             }),
           }}
         />
-        <h1 className="text-6xl font-semibold tracking-tighter title">{post.metadata.title}</h1>
-        <div className="flex justify-between items-center mt-2 mb-8 text-sm">
-          <p className="text-sm text-neutral-600 dark:text-neutral-400">{formatDate(post.metadata.publishedAt)}</p>
+        <p className="text-2xl sm:text-xl grid-child-left font-mondwest">{formatDate(post.metadata.publishedAt)}</p>
+        <div className="grid-child-center">
+          <article>
+            <CustomMDX source={post.content} />
+          </article>
         </div>
-        <article className="prose">
-          <CustomMDX source={post.content} />
-        </article>
+      </section>
+    </>
+  );
+}
+
+function TitleSection({ title, publishedAt }) {
+  if (!title) {
+    return null;
+  }
+
+  if (!publishedAt) {
+    return null;
+  }
+
+  return (
+    // {/* <div className="mb-20 text-stone-800"> */}
+    // {/*   <h1 className="mb-0 text-5xl sm:text-7xl font-mondwest">{title}</h1> */}
+    // {/*   <h2 className="mt-0.5 text-base font-normal opacity-50 font-nb-architect-neue">{formatDate(publishedAt)}</h2> */}
+    // {/* </div> */}
+    <div className="grid-child-center">
+      <div className="flex justify-center items-center h-48 !text-stone-800 sm:h-[25rem]">
+        <h1 className="text-6xl sm:text-7xl font-mondwest">{title}</h1>
       </div>
-    </section>
+    </div>
   );
 }

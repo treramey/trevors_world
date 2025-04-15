@@ -30,8 +30,8 @@ export default function Page() {
             &nbsp;and always making something. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua.
           </p>
-          <p>Some of the technologies I've been working with. </p>
-          <div className="flex justify-center mb-6 space-x-2">
+          <p>Some of the technologies I've been having fun with. </p>
+          <div className="flex justify-center my-12 space-x-2">
             <Image width={64} height={64} alt="Csharp pixel logo" src="/csharp_pixel.png" />
             <Image width={64} height={64} alt="Csharp pixel logo" src="/react_pixel.png" />
             <Image width={64} height={64} alt="Csharp pixel logo" src="/tailwind_pixel.png" />

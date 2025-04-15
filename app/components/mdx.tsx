@@ -2,7 +2,6 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { highlight } from "sugar-high";
 import { RetroCard } from "./retroCard";
 import { CodeBlock } from "./code-block";
 
@@ -52,12 +51,6 @@ function RoundedImage(props) {
 }
 
 function Code({ children, ...props }) {
-  // const codeHTML = highlight(children);
-  // const codeWithLineNumbers = codeHTML
-  //   .split("\n")
-  //   .map((line) => `<span class="line">${line}</span>`)
-  //   .join("\n");
-
   return (
     <RetroCard>
       <CodeBlock code={children} title={props.className ? props.className.replace("language-", "") : ""} {...props} />

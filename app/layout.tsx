@@ -130,7 +130,7 @@ export default function RootLayout({
         <main className="flex relative flex-col min-h-screen antialiased tracking-wide cursor-default selection:bg-gray-600/30">
           <div className="flex-1 flex-grow w-full">
             <div className="flex-col p-4 mx-auto w-full max-w-screen-2xl min-h-screen">
-              {/* <Navbar /> */}
+              <Navbar />
               {children}
               <Footer />
             </div>

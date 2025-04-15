@@ -19,7 +19,11 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
         aquaBlue: cn(
-          "bg-gradient-to-b from-[#c5c5c5] to-white/80  focus:from-[#0342b9] focus:to-[#83dffd] disabled:from-[#0342b9] disabled:to-[#83dffd] disabled:opacity-70! font-sm rounded-[20px]! border border-neutral-900/50 shadow-xs ",
+          "bg-gradient-to-b from-[#0342b9] to-[#83dffd] disabled:opacity-70! font-sm rounded-[20px]! border border-neutral-900/50 shadow-xs ",
+          "after:absolute after:top-0 after:left-0 after:w-full after:h-3/6 after:rounded-tl-[60px] after:rounded-tr-[60px] after:rounded-bl-[160px] after:rounded-br-[160px] after:bg-gradient-to-b after:from-white/90 after:to-white/30 after:opacity-80 after:mix-blend-color-dodge after:z-1 after:overflow-hidden",
+        ),
+        aquaGrey: cn(
+          "bg-gradient-to-b from-[#c5c5c5] to-[white_80%] disabled:opacity-70! font-sm rounded-[20px]! border border-neutral-900/50 shadow-xs ",
           "after:absolute after:top-0 after:left-0 after:w-full after:h-3/6 after:rounded-tl-[60px] after:rounded-tr-[60px] after:rounded-bl-[160px] after:rounded-br-[160px] after:bg-gradient-to-b after:from-white/90 after:to-white/30 after:opacity-80 after:mix-blend-color-dodge after:z-1 after:overflow-hidden",
         ),
       },

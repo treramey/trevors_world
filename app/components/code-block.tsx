@@ -49,7 +49,7 @@ export const CodeBlock = memo(({ title, code, ...props }: CodeBlockParams) => {
           </span>
         </div>
         <div className="flex justify-center items-center"> {title && <p className="m-0! text-sm ">{title}</p>}</div>
-        <Button variant="aquaBlue" size="sm" disabled={copied} onClick={onCopy}>
+        <Button variant="aquaGrey" size="sm" disabled={copied} onClick={onCopy}>
           <LazyMotion features={domAnimation}>
             <m.span
               key={copied ? "copied" : "copy"}
