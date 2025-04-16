@@ -83,7 +83,7 @@ export default async function Blog(props) {
             }),
           }}
         />
-        <p className="text-2xl sm:text-xl grid-child-left font-mondwest">{formatDate(post.metadata.publishedAt)}</p>
+        <p className="text-lg sm:text-xl grid-child-left font-mondwest">{formatDate(post.metadata.publishedAt)}</p>
         <div className="grid-child-center">
           <article>
             <CustomMDX source={post.content} />
@@ -110,7 +110,7 @@ function TitleSection({ title, publishedAt }) {
     // {/* </div> */}
     <div className="grid-child-center">
       <div className="flex justify-center items-center h-48 !text-stone-800 sm:h-[25rem]">
-        <h1 className="text-6xl sm:text-7xl font-mondwest">{title}</h1>
+        <h1 className="text-4xl sm:text-7xl font-mondwest">{title}</h1>
       </div>
     </div>
   );

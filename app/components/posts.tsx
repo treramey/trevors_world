@@ -13,7 +13,7 @@ export function LatestThreeBlogPosts() {
   const topThreePosts = getTop3LatestPosts();
 
   return (
-    <section className="grid-parent">
+    <section className="mb-6 grid-parent">
       <p className="text-2xl sm:text-xl grid-child-left font-mondwest">The garden</p>
       <div className="grid-child-center">
         {topThreePosts.map((post) => (

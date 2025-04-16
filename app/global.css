@@ -320,7 +320,7 @@ ul {
 }
 
 .prose p {
-  @apply my-4 text-neutral-800;
+  @apply text-neutral-800;
 }
 
 .prose h1 {

@@ -40,7 +40,7 @@ export default function Page() {
             <Image width={64} height={64} alt="Csharp pixel logo" src="/tanstack_pixel.png" />
           </div>
           <p>Here's what I've been up to nowadays.</p>
-          <RetroCard>
+          <RetroCard className="mb-6">
             <CodeBlock
               code={`let location = 'Frisco, TX'\nlet hobbies = [\n  'Building',\n  'Designing',\n  'Traveling',\n]`}
             />
