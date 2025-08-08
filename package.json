@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "preinstall": "corepack enable && corepack prepare pnpm@10.14.0 --activate"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
