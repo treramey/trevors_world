@@ -8,8 +8,8 @@ const nextConfig: NextConfig = {
   },
   trailingSlash: false,
   images: {
-    deviceSizes: [390, 435, 768, 1024, 1280],
-    formats: ["image/avif"],
+    deviceSizes: [360, 390, 435, 768, 1024, 1280],
+    formats: ["image/avif", "image/webp"],
   },
   experimental: {
     optimizePackageImports: ["framer-motion", "@supabase/supabase-js", "react-tweet"],

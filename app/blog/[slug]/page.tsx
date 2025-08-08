@@ -3,6 +3,8 @@ import { CustomMDX } from "app/components/mdx";
 import { formatDate, getBlogPosts } from "app/blog/utils";
 import { baseUrl } from "app/sitemap";
 
+export const dynamic = "force-static";
+
 export async function generateStaticParams() {
   const posts = getBlogPosts();
 

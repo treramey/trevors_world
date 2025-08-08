@@ -1,0 +1,35 @@
+---
+alwaysApply: true
+---
+## Project Structure Guide
+
+- **App entry**: `app/layout.tsx` and `app/page.tsx` define global layout, fonts, analytics, and the home page.
+- **Blog**:
+  - Listing page: `app/blog/page.tsx`
+  - Post route: `app/blog/[slug]/page.tsx`
+  - Content source: MDX files in `app/blog/posts/*.mdx`
+  - Utilities: `app/blog/utils.ts` provides `getBlogPosts()` and `formatDate()`
+  - MDX renderer: `app/components/mdx.tsx` maps headings, links, images, and code blocks
+- **UI components**: `app/components/*` (e.g., `code-block.tsx`, `retroCard.tsx`, `nav.tsx`, `footer.tsx`)
+- **SEO**:
+  - Sitemap: `app/sitemap.ts` (exports `baseUrl` used throughout)
+  - RSS: `app/rss/route.ts`
+  - Open Graph image: `app/og/route.tsx`
+  - Robots: `app/robots.ts`
+- **Config**: `next.config.ts`, `tsconfig.json`, `biome.json`
+
+### Key Links
+- Blog utilities: [app/blog/utils.ts](mdc:app/blog/utils.ts)
+- Blog post page: [app/blog/[slug]/page.tsx](mdc:app/blog/[slug]/page.tsx)
+- Blog index: [app/blog/page.tsx](mdc:app/blog/page.tsx)
+- MDX renderer: [app/components/mdx.tsx](mdc:app/components/mdx.tsx)
+- Sitemap (+ baseUrl): [app/sitemap.ts](mdc:app/sitemap.ts)
+- RSS: [app/rss/route.ts](mdc:app/rss/route.ts)
+- OG image route: [app/og/route.tsx](mdc:app/og/route.tsx)
+- Root layout: [app/layout.tsx](mdc:app/layout.tsx)
+
+### Behavior Overview
+- Blog post slugs are derived from the MDX filename (no directory nesting). See `getBlogPosts()` in [utils](mdc:app/blog/utils.ts).
+- Frontmatter is mandatory in each MDX post: `title`, `publishedAt`, `summary`, optional `image`.
+- If a post omits `image`, the OG image is generated from `app/og/route.tsx` using the post title.
+- `baseUrl` in `app/sitemap.ts` is the canonical origin used across metadata, sitemap, and RSS.

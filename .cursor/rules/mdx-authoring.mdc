@@ -1,0 +1,53 @@
+---
+globs: *.mdx
+description: Authoring conventions for blog posts in MDX
+---
+## MDX Authoring Rules
+
+- **Location**: Place posts in `app/blog/posts/*.mdx`. The filename becomes the post slug.
+- **Frontmatter (required)**: Use single-line `key: value` pairs at the top of the file.
+
+```md
+---
+title: Your Post Title
+publishedAt: 2025-01-01
+summary: One-sentence summary.
+image: /path-from-public.png # optional; starts with /
+---
+```
+
+- **Frontmatter parser constraints** (see [utils](mdc:app/blog/utils.ts)):
+  - Keys must be in the form `key: value` per line; multi-line values are not supported.
+  - Quotes are permitted but will be stripped. Prefer unquoted values (e.g., `title: My Title`).
+  - `publishedAt` accepts `YYYY-MM-DD` or full ISO `YYYY-MM-DDTHH:mm:ss`.
+
+- **Headings and anchors**: Headings automatically receive slugged IDs and anchor links. Keep headings unique, avoid symbols where possible. Renderer: [mdx.tsx](mdc:app/components/mdx.tsx).
+
+- **Code blocks**: Use fenced code blocks with a language tag so syntax is detected by the `CodeBlock` component.
+
+```md
+```tsx
+export function Example() {
+  return <div>Hello</div>
+}
+```
+```
+
+- **Links**:
+  - Internal: `[text](/path)` → Next `Link` is used automatically.
+  - Hash anchors: `[text](#section)` allowed.
+  - External: will open in a new tab with `rel="noopener noreferrer"`.
+
+- **Images**: Use Next `Image` component directly in MDX to benefit from optimization:
+
+```mdx
+<Image src="/my-image.png" width={1200} height={630} alt="Alt text" />
+```
+
+- **Tables**: For custom tables, use the provided `Table` component if passing structured data; Markdown tables also work but won’t use the custom component.
+
+- **Date display**: `formatDate()` is used in the post page to render human-friendly dates.
+
+### References
+- Post page: [app/blog/[slug]/page.tsx](mdc:app/blog/[slug]/page.tsx)
+- MDX renderer: [app/components/mdx.tsx](mdc:app/components/mdx.tsx)

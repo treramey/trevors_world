@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { cache } from "react";
 
 export type Metadata = {
 	title: string;
@@ -49,16 +50,14 @@ function getMDXData(dir) {
 	});
 }
 
-export function getBlogPosts() {
-	return getMDXData(path.join(process.cwd(), "app", "blog", "posts")).sort(
-		(a, b) => {
-			if (new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)) {
-				return -1;
-			}
-			return 1;
-		},
-	);
-}
+export const getBlogPosts = cache(function getBlogPosts() {
+    return getMDXData(path.join(process.cwd(), "app", "blog", "posts")).sort((a, b) => {
+        if (new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)) {
+            return -1;
+        }
+        return 1;
+    });
+});
 
 export function formatDate(date: string, includeRelative = false) {
 	let currentDate = new Date();

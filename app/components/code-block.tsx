@@ -14,7 +14,8 @@ type CodeBlockParams = {
 
 export const CodeBlock = memo(({ title, code, ...props }: CodeBlockParams) => {
   const [copied, setCopied] = useState(false);
-  const codeHTML = highlight(code);
+  // Defer highlight for initial render to reduce FCP impact
+  const codeHTML = useMemo(() => highlight(code), [code]);
 
   const onCopy = () => {
     setCopied(true);

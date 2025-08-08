@@ -12,7 +12,8 @@ import { Suspense } from "react";
 
 const inter = Inter({
   subsets: ["latin"],
-  display: "swap",
+  display: "optional",
+  preload: false,
   variable: "--font-inter",
 });
 
@@ -34,6 +35,8 @@ const nbArchitect = localFont({
       style: "normal",
     },
   ],
+  display: "swap",
+  preload: false,
   variable: "--font-nb-architect",
 });
 
@@ -55,6 +58,8 @@ const nbArchitectNeue = localFont({
       style: "normal",
     },
   ],
+  display: "swap",
+  preload: false,
   variable: "--font-nb-architect-neue",
 });
 
@@ -66,6 +71,8 @@ const mondwest = localFont({
       style: "normal",
     },
   ],
+  display: "swap",
+  preload: false,
   variable: "--font-mondwest",
 });
 
@@ -77,6 +84,8 @@ const neueBit = localFont({
       style: "normal",
     },
   ],
+  display: "swap",
+  preload: false,
   variable: "--font-neuebit",
 });
 
@@ -117,6 +126,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head />
       <body
         className={cx(
           inter.variable,
@@ -137,8 +147,10 @@ export default function RootLayout({
           </div>
           <Analytics />
           <SpeedInsights />
-          <div className="fixed inset-0 z-50 w-full h-screen opacity-30 pointer-events-none mix-blend-overlay crt-line" />
-          <div className="absolute inset-x-0 bottom-0 z-0 w-full bg-repeat-x sm:opacity-70 h-[8rem] bg-[length:10px_240px] bg-[url('/bg-gradient.svg')] pointer-events-none" />
+          <div
+            className="fixed inset-0 z-50 w-full h-screen opacity-30 pointer-events-none mix-blend-overlay crt-line motion-reduce:hidden"
+          />
+          <div className="absolute inset-x-0 bottom-0 z-0 w-full bg-repeat-x sm:opacity-70 h-[8rem] bg-[length:10px_240px] bg-[url('/bg-gradient.svg')] pointer-events-none motion-reduce:hidden" />
           <Suspense fallback={null}>
             <MouseClick />
           </Suspense>

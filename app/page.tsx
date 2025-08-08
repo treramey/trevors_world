@@ -5,6 +5,8 @@ import { CodeBlock } from "./components/code-block";
 import Image from "next/image";
 import Link from "next/link";
 
+export const dynamic = "force-static";
+
 export default function Page() {
   return (
     <>
@@ -32,12 +34,12 @@ export default function Page() {
           </p>
           <p>Some of the technologies I've been having fun with. </p>
           <div className="flex justify-center my-12 space-x-2">
-            <Image width={64} height={64} alt="Csharp pixel logo" src="/csharp_pixel.png" />
-            <Image width={64} height={64} alt="Csharp pixel logo" src="/react_pixel.png" />
-            <Image width={64} height={64} alt="Csharp pixel logo" src="/tailwind_pixel.png" />
-            <Image width={64} height={64} alt="Csharp pixel logo" src="/typescript_pixel.png" />
-            <Image width={64} height={64} alt="Csharp pixel logo" src="/nextjs_pixel.png" />
-            <Image width={64} height={64} alt="Csharp pixel logo" src="/tanstack_pixel.png" />
+            <Image loading="lazy" width={64} height={64} alt="Csharp pixel logo" src="/csharp_pixel.png" />
+            <Image loading="lazy" width={64} height={64} alt="React pixel logo" src="/react_pixel.png" />
+            <Image loading="lazy" width={64} height={64} alt="Tailwind pixel logo" src="/tailwind_pixel.png" />
+            <Image loading="lazy" width={64} height={64} alt="Typescript pixel logo" src="/typescript_pixel.png" />
+            <Image loading="lazy" width={64} height={64} alt="Next pixel logo" src="/nextjs_pixel.png" />
+            {/* <Image loading="lazy" width={64} height={64} alt="Tanstack pixel logo" src="/tanstack_pixel.png" /> */}
           </div>
           <p>Here's what I've been up to nowadays.</p>
           <RetroCard className="mb-6">

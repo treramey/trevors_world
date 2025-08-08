@@ -70,35 +70,42 @@ export default function useSound<T = any>(
     setSound(this);
   };
 
-  // We want to lazy-load Howler, since sounds can't play on load anyway.
-  useOnMount(() => {
-    import("howler").then((mod) => {
-      if (!isMounted.current) {
-        // Depending on the module system used, `mod` might hold
-        // the export directly, or it might be under `default`.
-        HowlConstructor.current = mod.Howl ?? mod.default.Howl;
-
-        isMounted.current = true;
-
+  // Defer loading Howler and constructing the sound until enabled
+  React.useEffect(() => {
+    if (!soundEnabled) {
+      return;
+    }
+    let disposed = false;
+    const load = async () => {
+      const mod = await import("howler");
+      if (disposed) return;
+      HowlConstructor.current = mod.Howl ?? mod.default.Howl;
+      isMounted.current = true;
+      setSound(
         new HowlConstructor.current({
           src: Array.isArray(src) ? src : [src],
           volume,
           rate: playbackRate,
           onload: handleLoad,
           ...delegated,
-        });
-      }
-    });
-
+        }),
+      );
+    };
+    void load();
     return () => {
+      disposed = true;
       isMounted.current = false;
     };
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [soundEnabled]);
 
   // When the `src` changes, we have to do a whole thing where we recreate
   // the Howl instance. This is because Howler doesn't expose a way to
   // tweak the sound
   React.useEffect(() => {
+    if (!soundEnabled) {
+      return;
+    }
     if (HowlConstructor.current && sound) {
       setSound(
         new HowlConstructor.current({
@@ -109,14 +116,8 @@ export default function useSound<T = any>(
         }),
       );
     }
-    // The linter wants to run this effect whenever ANYTHING changes,
-    // but very specifically I only want to recreate the Howl instance
-    // when the `src` changes. Other changes should have no effect.
-    // Passing array to the useEffect dependencies list will result in
-    // ifinite loop so we need to stringify it, for more details check
-    // https://github.com/facebook/react/issues/14476#issuecomment-471199055
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(src)]);
+  }, [soundEnabled, JSON.stringify(src)]);
 
   // Whenever volume/playbackRate are changed, change those properties
   // on the sound instance.

@@ -1,0 +1,25 @@
+---
+globs: *.ts,*.tsx
+description: TypeScript, React, and Next.js conventions for this project
+---
+## TS/React/Next Conventions
+
+- **Project versions**: Next 15, React 19. Prefer Server Components; use `"use client"` only when browser APIs or hooks are required.
+- **Exports**: Use named exports where possible. For routes, export `metadata`, `generateStaticParams`, `generateMetadata`, and default component as needed.
+- **Routing**: App Router. Avoid pages dir patterns. Use file-based routes under `app/*`.
+- **URL base**: Import and reuse `baseUrl` from [app/sitemap.ts](mdc:app/sitemap.ts) when constructing absolute URLs.
+- **Images**: Use `next/image`. Respect device sizes and formats configured in [next.config.ts](mdc:next.config.ts).
+- **Fonts**: Use `next/font` (see [app/layout.tsx](mdc:app/layout.tsx)).
+- **MDX**: Render post content with `CustomMDX` from [app/components/mdx.tsx](mdc:app/components/mdx.tsx).
+- **Errors**: Use `notFound()` from `next/navigation` for missing resources.
+
+### Biome and style
+- 2-space indentation, 120 char line width, imports organized automatically (see [biome.json](mdc:biome.json)).
+- Avoid unused variables/imports (errors/warnings enabled).
+- `dangerouslySetInnerHTML` is allowed only where intended (e.g., structured data in the post page) and typically paired with `suppressHydrationWarning`.
+- Prefer clear, descriptive names. Avoid 1–2 character identifiers.
+- Keep control flow shallow; use early returns.
+
+### Patterns in this codebase
+- Dynamic post metadata and static params: see [app/blog/[slug]/page.tsx](mdc:app/blog/[slug]/page.tsx).
+- Date helpers and MDX loading: see [app/blog/utils.ts](mdc:app/blog/utils.ts).

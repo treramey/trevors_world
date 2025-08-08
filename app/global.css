@@ -39,6 +39,11 @@
   --chart-4: hsl(43 74% 66%);
   --chart-5: hsl(27 87% 67%);
   --radius: 0.6rem;
+  /* Custom cursor assets */
+  --cursor-default-1x: url("/cursor.png");
+  --cursor-default-2x: url("/cursor@2x.png");
+  --cursor-pointer-1x: url("/pointer.png");
+  --cursor-pointer-2x: url("/pointer@2x.png");
 }
 
 .dark {
@@ -113,8 +118,9 @@
 @layer utilities {
   .cursor-default {
     cursor: default;
-    cursor: url(/cursor.png) 0 0, default;
-    cursor: -webkit-image-set(url("/cursor.png") 1x, url("/cursor@2x.png") 2x) 0 0, default;
+    cursor: var(--cursor-default-1x) 0 0, default;
+    cursor: -webkit-image-set(var(--cursor-default-1x) 1x, var(--cursor-default-2x) 2x) 0 0, default;
+    cursor: image-set(var(--cursor-default-1x) 1x, var(--cursor-default-2x) 2x) 0 0, default;
   }
 }
 
@@ -127,44 +133,27 @@
   }
 }
 
-a,
-button,
-[role="button"],
-input[type="submit"],
-input[type="button"],
-select,
-input[type="checkbox"],
-input[type="radio"],
-label[for],
-.clickable,
-[onclick],
-[data-clickable="true"],
-summary,
-details :hover {
-  cursor: pointer;
-  cursor: url(/pointer.png) 6 0, pointer;
-  cursor: -webkit-image-set(url("/pointer.png") 1x, url("/pointer@2x.png") 2x) 6 0, pointer;
-  user-select: none;
+@media (hover: hover) and (pointer: fine) {
+  a,
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"],
+  select,
+  input[type="checkbox"],
+  input[type="radio"],
+  label[for],
+  .clickable,
+  [data-clickable="true"],
+  summary {
+    cursor: pointer;
+    cursor: var(--cursor-pointer-1x) 6 0, pointer;
+    cursor: -webkit-image-set(var(--cursor-pointer-1x) 1x, var(--cursor-pointer-2x) 2x) 6 0, pointer;
+    cursor: image-set(var(--cursor-pointer-1x) 1x, var(--cursor-pointer-2x) 2x) 6 0, pointer;
+  }
 }
 
-a:active,
-button:active,
-[role="button"]:active,
-input[type="submit"]:active,
-input[type="button"]:active,
-select:active,
-input[type="checkbox"]:active,
-input[type="radio"]:active,
-label[for]:active,
-.clickable:active,
-[onclick]:active,
-[data-clickable="true"]:active,
-summary:active,
-details :hover:active {
-  cursor: pointer;
-  cursor: url(/pointer.png) 6 0, pointer;
-  cursor: -webkit-image-set(url("/pointer.png") 1x, url("/pointer@2x.png") 2x) 6 0, pointer;
-}
+/* Active state keeps pointer by default; no duplicate cursor rules needed */
 
 html {
   color-scheme: light;

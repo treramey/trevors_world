@@ -1,0 +1,19 @@
+---
+alwaysApply: true
+description: SEO, canonical URLs, OG images, RSS, and sitemap behavior
+---
+## SEO and Routing
+
+- **Canonical origin**: Update `baseUrl` in [app/sitemap.ts](mdc:app/sitemap.ts) when deploying to a new domain. `metadataBase` in [app/layout.tsx](mdc:app/layout.tsx) uses this.
+- **Open Graph images**:
+  - If a post frontmatter defines `image`, it will be used as the OG image.
+  - Otherwise, OG image is generated via [app/og/route.tsx](mdc:app/og/route.tsx) using the post title (`/og?title=...`).
+- **Sitemap**: [app/sitemap.ts](mdc:app/sitemap.ts) automatically includes `/` and `/blog` plus all posts from MDX.
+- **RSS**: [app/rss/route.ts](mdc:app/rss/route.ts) builds an RSS 2.0 feed from the same post list.
+- **Trailing slashes**: Disabled (`trailingSlash: false`) in [next.config.ts](mdc:next.config.ts).
+- **Robots**: Managed via `app/robots.ts`.
+
+### Adding a blog post (quick checklist)
+1. Add `app/blog/posts/my-post.mdx` with required frontmatter.
+2. Use fenced code blocks with language tags; use `<Image />` for images.
+3. Build/deploy — sitemap and RSS pick up the new post automatically.
