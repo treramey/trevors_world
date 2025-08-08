@@ -409,6 +409,14 @@ table {
   body {
     @apply bg-background text-foreground;
   }
+  /* Ensure headings inside sectioning content have an explicit font-size
+     to avoid browser default changes/deprecations. Utility classes will override. */
+  article h1,
+  section h1,
+  nav h1,
+  aside h1 {
+    font-size: 2em;
+  }
 }
 
 @media (min-width: 768px) {

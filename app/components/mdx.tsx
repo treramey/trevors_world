@@ -80,6 +80,8 @@ function createHeading(level) {
           href: `#${slug}`,
           key: `link-${slug}`,
           className: "anchor",
+          "aria-label": `Anchor link to ${slug}`,
+          title: `Anchor link to ${slug}`,
         }),
       ],
       children,
