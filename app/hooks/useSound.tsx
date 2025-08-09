@@ -1,5 +1,5 @@
-import React from "react";
 import type { Howl } from "howler";
+import React from "react";
 
 type SpriteMap = {
   [key: string]: [number, number];

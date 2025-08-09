@@ -1,9 +1,9 @@
-import Link from "next/link";
+import type { Metadata } from "app/blog/utils";
 
 import { formatDate, getBlogPosts } from "app/blog/utils";
 import { ArrowRight } from "lucide-react";
 import { Metadata as NextMetadata } from "next";
-import type { Metadata } from "app/blog/utils";
+import Link from "next/link";
 
 function getTop3LatestPosts() {
   return getBlogPosts().slice(0, 3);
@@ -35,7 +35,7 @@ export function ListAllBlogPosts() {
   const years = Array.from(new Set(posts.map((post) => new Date(post.metadata.publishedAt).getFullYear())));
   return years.map((year) => {
     return (
-      <section key={year} className="grid-parent">
+      <section key={year} className="mb-6 grid-parent">
         <p className="text-2xl sm:text-xl grid-child-left font-mondwest">{year}</p>
         <div className="grid-child-center">
           {posts
@@ -61,12 +61,12 @@ function BlogPost({ post }: BlogPostProps) {
   return (
     <Link
       key={post.slug}
-      className="flex flex-col mb-5 border-b duration-200 border-stone-300 group"
+      className="flex flex-col mb-5 border-b duration-200 border-slate-300 group"
       href={`/blog/${post.slug ?? ""}`}
     >
       <div className="flex justify-between items-center w-full">
         <div className="flex flex-col space-x-0 w-full md:flex-row md:space-x-2">
-          {post.metadata.title && <h3 className="!text-stone-900">{post.metadata.title}</h3>}
+          {post.metadata.title && <h3 className="!text-slate-900">{post.metadata.title}</h3>}
         </div>
         <div className="flex items-center">
           <ArrowRight className="w-4 h-4 opacity-0 duration-200 group-hover:opacity-100 group-hover:translate-x-0.5" />

@@ -1,9 +1,8 @@
 import { LatestThreeBlogPosts } from "app/components/posts";
-import { RetroCard } from "./components/retroCard";
-import { CodeBlock } from "./components/code-block";
-
 import Image from "next/image";
 import Link from "next/link";
+import { CodeBlock } from "./components/code-block";
+import { RetroCard } from "./components/retroCard";
 
 export const dynamic = "force-static";
 
@@ -12,8 +11,8 @@ export default function Page() {
     <>
       <section className="grid-parent">
         <div className="grid-child-center">
-          <div className="flex justify-center items-center h-48 !text-stone-800 sm:h-[25rem]">
-            <h1 className="text-6xl sm:text-7xl font-mondwest">Trevor</h1>
+          <div className="flex justify-center items-center h-36 !text-slate-800 sm:h-[25rem]">
+            <h1 className="text-7xl sm:text-8xl font-mondwest">Trevor</h1>
           </div>
           <p className="text-pretty">Hello! I'm Trevor — a software developer building tools for the web.</p>
           <p>

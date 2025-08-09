@@ -1,6 +1,6 @@
 "use client";
 
-import { LazyMotion, domAnimation, m } from "framer-motion";
+import { domAnimation, LazyMotion, m } from "framer-motion";
 import { memo, useMemo, useState } from "react";
 import { highlight } from "sugar-high";
 

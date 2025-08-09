@@ -6,7 +6,7 @@ export function Posts() {
   return posts.map((post) => {
     <div className="flex justify-between items-center w-full">
       <div className="flex flex-col space-x-0 w-full md:flex-row md:space-x-2">
-        <h3 className="text-neutral-800">{post.metadata.title}</h3>
+        <h3 className="text-slate-800">{post.metadata.title}</h3>
         <p className="max-w-prose !tracking-wide opacity-70 group-hover:opacity-90 font-mondwest">
           {formatDate(post.metadata.publishedAt, false)}
         </p>

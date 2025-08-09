@@ -1,7 +1,7 @@
-import { notFound } from "next/navigation";
-import { CustomMDX } from "app/components/mdx";
 import { formatDate, getBlogPosts } from "app/blog/utils";
+import { CustomMDX } from "app/components/mdx";
 import { baseUrl } from "app/sitemap";
+import { notFound } from "next/navigation";
 
 export const dynamic = "force-static";
 
@@ -106,13 +106,13 @@ function TitleSection({ title, publishedAt }) {
   }
 
   return (
-    // {/* <div className="mb-20 text-stone-800"> */}
+    // {/* <div className="mb-20 text-slate-800"> */}
     // {/*   <h1 className="mb-0 text-5xl sm:text-7xl font-mondwest">{title}</h1> */}
     // {/*   <h2 className="mt-0.5 text-base font-normal opacity-50 font-nb-architect-neue">{formatDate(publishedAt)}</h2> */}
     // {/* </div> */}
     <div className="grid-child-center">
-      <div className="flex justify-center items-center h-48 !text-stone-800 sm:h-[25rem]">
-        <h1 className="text-4xl sm:text-7xl font-mondwest">{title}</h1>
+      <div className="flex justify-center items-center h-36 !text-slate-800 sm:h-[25rem]">
+        <h1 className="text-7xl sm:text-8xl font-mondwest">{title}</h1>
       </div>
     </div>
   );
