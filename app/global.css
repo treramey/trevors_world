@@ -5,6 +5,21 @@
 /* @custom-variant dark (&:is(.dark *)); */
 
 :root {
+  /* Rosé Pine palette */
+  --rp-base: #191724;
+  --rp-surface: #1f1d2e;
+  --rp-overlay: #26233a;
+  --rp-muted: #6e6a86;
+  --rp-subtle: #908caa;
+  --rp-text: #e0def4;
+  --rp-love: #eb6f92;
+  --rp-gold: #f6c177;
+  --rp-rose: #ebbcba;
+  --rp-pine: #31748f;
+  --rp-foam: #9ccfd8;
+  --rp-iris: #c4a7e7;
+
+  /* Default sugar-high token variables (site-wide) */
   --sh-class: #8aadf4;
   --sh-identifier: #cad3f5;
   --sh-sign: #8087a2;
@@ -124,13 +139,17 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --sh-class: #4c97f8;
-    --sh-identifier: white;
-    --sh-keyword: #f47067;
-    --sh-string: #0fa295;
-  }
+/* Rosé Pine syntax theme scoped only to code blocks */
+.prose pre code {
+  --sh-class: var(--rp-iris);
+  --sh-identifier: var(--rp-text);
+  --sh-sign: var(--rp-subtle);
+  --sh-string: var(--rp-gold);
+  --sh-keyword: var(--rp-iris);
+  --sh-comment: var(--rp-muted);
+  --sh-jsxliterals: var(--rp-foam);
+  --sh-property: var(--rp-foam);
+  --sh-entity: var(--rp-rose);
 }
 
 @media (hover: hover) and (pointer: fine) {

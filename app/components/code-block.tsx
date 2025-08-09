@@ -106,7 +106,10 @@ export const CodeBlock = memo(({ title, code, ...props }: CodeBlockParams) => {
           </LazyMotion>
         </Button>
       </div>
-      <div className="overflow-x-auto flex-1 py-4 pr-4 text-sm sm:py-2 sm:pr-2 bg-neutral-900">
+      <div
+        className="overflow-x-auto flex-1 py-4 pr-4 text-sm sm:py-2 sm:pr-2"
+        style={{ backgroundColor: "var(--rp-surface)", color: "var(--rp-text)" }}
+      >
         <pre>
           <code className="horizontal-scroll-area" dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />
         </pre>
