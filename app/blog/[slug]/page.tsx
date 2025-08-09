@@ -47,6 +47,16 @@ export async function generateMetadata(props) {
   };
 }
 
+function splitTitle(title: string): { mainTitle: string; subtitle?: string } {
+  const i = title.indexOf(":");
+  if (i === -1) {
+    return { mainTitle: title.trim() };
+  }
+  const mainTitle = title.slice(0, i).trim();
+  const subtitle = title.slice(i + 1).trim();
+  return { mainTitle: mainTitle || title.trim(), subtitle: subtitle || undefined };
+}
+
 export default async function Blog(props) {
   const params = await props.params;
   const post = getBlogPosts().find((post) => post.slug === params.slug);
@@ -59,7 +69,7 @@ export default async function Blog(props) {
     <>
       <section className="grid-parent">
         <div className="grid-child-center">
-          <TitleSection title={post.metadata.title} publishedAt={post.metadata.publishedAt} />
+          <TitleSection title={post.metadata.title} subtitle={post.metadata.subtitle} publishedAt={post.metadata.publishedAt} />
         </div>
       </section>
       <section className="grid-parent prose">
@@ -96,7 +106,7 @@ export default async function Blog(props) {
   );
 }
 
-function TitleSection({ title, publishedAt }) {
+function TitleSection({ title, subtitle: subtitleFromMeta, publishedAt }) {
   if (!title) {
     return null;
   }
@@ -105,6 +115,9 @@ function TitleSection({ title, publishedAt }) {
     return null;
   }
 
+  const { mainTitle, subtitle: subtitleFromTitle } = splitTitle(title);
+  const subtitle = subtitleFromMeta ?? subtitleFromTitle;
+
   return (
     // {/* <div className="mb-20 text-slate-800"> */}
     // {/*   <h1 className="mb-0 text-5xl sm:text-7xl font-mondwest">{title}</h1> */}
@@ -112,7 +125,12 @@ function TitleSection({ title, publishedAt }) {
     // {/* </div> */}
     <div className="grid-child-center">
       <div className="flex justify-center items-center h-36 !text-slate-800 sm:h-[25rem]">
-        <h1 className="text-7xl sm:text-8xl font-mondwest">{title}</h1>
+        <div className="flex flex-col items-center gap-2">
+          <h1 className="text-7xl sm:text-8xl font-mondwest text-balance text-center">{mainTitle}</h1>
+          {subtitle && (
+            <p className="text-base sm:text-lg font-nb-architect text-slate-600 text-center max-w-prose">{subtitle}</p>
+          )}
+        </div>
       </div>
     </div>
   );

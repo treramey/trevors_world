@@ -2,7 +2,6 @@ import type { Metadata } from "app/blog/utils";
 
 import { formatDate, getBlogPosts } from "app/blog/utils";
 import { ArrowRight } from "lucide-react";
-import { Metadata as NextMetadata } from "next";
 import Link from "next/link";
 
 function getTop3LatestPosts() {

@@ -7,6 +7,7 @@ export type Metadata = {
   publishedAt: string;
   summary: string;
   image?: string;
+  subtitle?: string;
 };
 
 function parseFrontmatter(fileContent: string) {
