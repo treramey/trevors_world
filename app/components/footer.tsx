@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ThemeToggle } from "./theme-toggle";
 
 export default function Footer() {
   return (
@@ -18,6 +19,14 @@ export default function Footer() {
         <p className="font-nb-architect">Dream, Build, Ship</p>
       </div>
       <div className="flex flex-col gap-2 mt-4 text-2xl font-medium sm:text-xl lg:mt-0 grid-child-center font-mondwest">
+        <Link
+          className="flex items-center opacity-70 transition-all hover:opacity-100"
+          rel="noopener noreferrer"
+          target="_blank"
+          href="https://x.com/treramey"
+        >
+          X
+        </Link>
         <Link
           className="flex items-center opacity-70 transition-all hover:opacity-100"
           rel="noopener noreferrer"
@@ -52,6 +61,7 @@ export default function Footer() {
         {/*   RSS */}
         {/* </Link> */}
       </div>
+      <div className="grid-child-right flex lg:order-none lg:justify-end">{/* <ThemeToggle /> */}</div>
     </footer>
   );
 }

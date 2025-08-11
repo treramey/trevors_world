@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import { Suspense } from "react";
 import { MouseClick } from "./components/click";
+import { ThemeProvider } from "./providers";
 import Footer from "./components/footer";
 import { Navbar } from "./components/nav";
 import { baseUrl } from "./sitemap";
@@ -130,16 +131,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           nbArchitectNeue.variable,
           neueBit.variable,
           mondwest.variable,
-          "bg-primary-100 text-gray-950 ",
         )}
       >
         <main className="flex relative flex-col min-h-screen antialiased tracking-wide cursor-default selection:bg-gray-600/30">
           <div className="flex-1 flex-grow w-full">
-            <div className="flex-col p-4 mx-auto w-full max-w-screen-2xl min-h-screen">
-              <Navbar />
-              {children}
-              <Footer />
-            </div>
+            <ThemeProvider>
+              <div className="flex-col p-4 mx-auto w-full max-w-screen-2xl min-h-screen">
+                <Navbar />
+                {children}
+                <Footer />
+              </div>
+            </ThemeProvider>
           </div>
           <Analytics />
           <SpeedInsights />

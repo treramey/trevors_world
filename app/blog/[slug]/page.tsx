@@ -95,7 +95,7 @@ export default async function Blog(props) {
             }),
           }}
         />
-        <p className="text-lg sm:text-xl grid-child-left font-mondwest">{formatDate(post.metadata.publishedAt)}</p>
+        <p className="text-lg sm:text-xl grid-child-left font-mondwest text-muted-foreground">{formatDate(post.metadata.publishedAt)}</p>
         <div className="grid-child-center">
           <article>
             <CustomMDX source={post.content} />
@@ -124,11 +124,11 @@ function TitleSection({ title, subtitle: subtitleFromMeta, publishedAt }) {
     // {/*   <h2 className="mt-0.5 text-base font-normal opacity-50 font-nb-architect-neue">{formatDate(publishedAt)}</h2> */}
     // {/* </div> */}
     <div className="grid-child-center">
-      <div className="flex justify-center items-center h-36 !text-slate-800 sm:h-[25rem]">
+      <div className="flex justify-center items-center h-36 sm:h-[25rem]">
         <div className="flex flex-col items-center gap-2">
-          <h1 className="text-7xl sm:text-8xl font-mondwest text-balance text-center">{mainTitle}</h1>
+          <h1 className="text-7xl sm:text-8xl font-mondwest text-balance text-center text-foreground">{mainTitle}</h1>
           {subtitle && (
-            <p className="text-base sm:text-lg font-nb-architect text-slate-600 text-center max-w-prose">{subtitle}</p>
+            <p className="text-base sm:text-lg font-nb-architect text-muted-foreground text-center max-w-prose">{subtitle}</p>
           )}
         </div>
       </div>

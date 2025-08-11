@@ -7,6 +7,7 @@
     "preinstall": "corepack enable && corepack prepare pnpm@10.14.0 --activate"
   },
   "dependencies": {
+    "next-themes": "^0.3.0",
     "@radix-ui/react-slot": "^1.2.3",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",

@@ -60,12 +60,12 @@ function BlogPost({ post }: BlogPostProps) {
   return (
     <Link
       key={post.slug}
-      className="flex flex-col mb-5 border-b duration-200 border-slate-300 group"
+      className="flex flex-col mb-5 border-b duration-200 border-border group"
       href={`/blog/${post.slug ?? ""}`}
     >
       <div className="flex justify-between items-center w-full">
         <div className="flex flex-col space-x-0 w-full md:flex-row md:space-x-2">
-          {post.metadata.title && <h3 className="!text-slate-900">{post.metadata.title}</h3>}
+          {post.metadata.title && <h3 className="text-foreground">{post.metadata.title}</h3>}
         </div>
         <div className="flex items-center">
           <ArrowRight className="w-4 h-4 opacity-0 duration-200 group-hover:opacity-100 group-hover:translate-x-0.5" />

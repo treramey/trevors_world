@@ -5,6 +5,7 @@
     "ignoreUnknown": true,
     "includes": [
       "**",
+      "!app/global.css",
       "!.vitest/**",
       "!node_modules/**",
       "!.next/**",

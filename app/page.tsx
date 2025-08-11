@@ -11,8 +11,8 @@ export default function Page() {
     <>
       <section className="grid-parent">
         <div className="grid-child-center">
-          <div className="flex justify-center items-center h-36 !text-slate-800 sm:h-[25rem]">
-            <h1 className="text-7xl sm:text-8xl font-mondwest">Trevor</h1>
+          <div className="flex justify-center items-center h-36 sm:h-[25rem]">
+            <h1 className="text-7xl sm:text-8xl font-mondwest text-foreground">Trevor</h1>
           </div>
           <p className="text-pretty">Hello! I'm Trevor — a software developer building tools for the web.</p>
           <p>

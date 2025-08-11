@@ -2,7 +2,6 @@
 
 @plugin 'tailwindcss-animate';
 
-/* @custom-variant dark (&:is(.dark *)); */
 
 :root {
   /* Rosé Pine palette */
@@ -29,13 +28,16 @@
   --sh-jsxliterals: #7dc4e4;
   --sh-property: #f5a97f;
   --sh-entity: #f5bde6;
-  --background: hsl(0 0% 100%);
+
+  --link-color: #6266d1;
+  --background: #faf3eb;
   --foreground: hsl(20 14.3% 4.1%);
   --card: hsl(0 0% 100%);
   --card-foreground: hsl(20 14.3% 4.1%);
   --popover: hsl(0 0% 100%);
   --popover-foreground: hsl(20 14.3% 4.1%);
   --primary: hsl(24 9.8% 10%);
+
   --primary-foreground: hsl(60 9.1% 97.8%);
   --secondary: hsl(60 4.8% 95.9%);
   --secondary-foreground: hsl(24 9.8% 10%);
@@ -62,30 +64,32 @@
 }
 
 .dark {
-  --background: hsl(20 14.3% 4.1%);
-  --foreground: hsl(60 9.1% 97.8%);
-  --card: hsl(20 14.3% 4.1%);
-  --card-foreground: hsl(60 9.1% 97.8%);
-  --popover: hsl(20 14.3% 4.1%);
-  --popover-foreground: hsl(60 9.1% 97.8%);
-  --primary: hsl(60 9.1% 97.8%);
-  --primary-foreground: hsl(24 9.8% 10%);
-  --secondary: hsl(12 6.5% 15.1%);
-  --secondary-foreground: hsl(60 9.1% 97.8%);
-  --muted: hsl(12 6.5% 15.1%);
-  --muted-foreground: hsl(24 5.4% 63.9%);
-  --accent: hsl(12 6.5% 15.1%);
-  --accent-foreground: hsl(60 9.1% 97.8%);
-  --destructive: hsl(0 62.8% 30.6%);
-  --destructive-foreground: hsl(60 9.1% 97.8%);
-  --border: hsl(12 6.5% 15.1%);
-  --input: hsl(12 6.5% 15.1%);
-  --ring: hsl(24 5.7% 82.9%);
-  --chart-1: hsl(220 70% 50%);
-  --chart-2: hsl(160 60% 45%);
-  --chart-3: hsl(30 80% 55%);
-  --chart-4: hsl(280 65% 60%);
-  --chart-5: hsl(340 75% 55%);
+  /* Warm dark palette to complement light's warm primary-100 */
+  --background: hsl(0 0% 0%);
+  --foreground: hsl(30 15% 92%);
+  --card: hsl(30 10% 14%);
+  --card-foreground: hsl(30 15% 92%);
+  --popover: hsl(30 10% 14%);
+  --popover-foreground: hsl(30 15% 92%);
+  --primary: hsl(30 15% 92%);
+  --primary-foreground: hsl(30 12% 12%);
+  --secondary: hsl(30 9% 18%);
+  --secondary-foreground: hsl(30 15% 92%);
+  --muted: hsl(30 9% 20%);
+  --muted-foreground: hsl(30 10% 70%);
+  --accent: hsl(30 9% 18%);
+  --accent-foreground: hsl(30 15% 92%);
+  --destructive: hsl(0 62% 45%);
+  --destructive-foreground: hsl(30 15% 96%);
+  --border: hsl(30 10% 26%);
+  --input: hsl(30 10% 26%);
+  --ring: hsl(30 20% 70%);
+  /* Charts tuned to be readable on warm dark */
+  --chart-1: hsl(210 65% 60%);
+  --chart-2: hsl(160 55% 50%);
+  --chart-3: hsl(30 75% 55%);
+  --chart-4: hsl(280 60% 65%);
+  --chart-5: hsl(340 70% 60%);
 }
 
 @theme inline {
@@ -120,28 +124,29 @@
 }
 
 @theme {
-  --color-primary-100: #faf3eb;
   --font-nb-architect: var(--font-nb-architect);
   --font-nb-architect-neue: var(--font-nb-architect-neue);
   --font-mondwest: var(--font-mondwest);
   --font-neuebit: var(--font-neuebit);
   --font-inter: var(--font-inter);
-  --cursor-default: -webkit-image-set(url("/cursor.png") 1x, url("/cursor.png") 2x) 0 0, default;
-  --link-color: #6266d1;
 }
 
-@layer utilities {
+/* Custom cursor implementation - simplified and reliable */
+.cursor-default {
+  cursor: url("/cursor.png"), url("/cursor@2x.png"), default;
+}
+
+/* Modern browsers with image-set support */
+@supports (cursor: image-set(url("/cursor.png") 1x)) {
   .cursor-default {
-    cursor: default;
-    cursor:
-      var(--cursor-default-1x) 0 0,
-      default;
-    cursor:
-      -webkit-image-set(var(--cursor-default-1x) 1x, var(--cursor-default-2x) 2x) 0 0,
-      default;
-    cursor:
-      image-set(var(--cursor-default-1x) 1x, var(--cursor-default-2x) 2x) 0 0,
-      default;
+    cursor: image-set(url("/cursor.png") 1x, url("/cursor@2x.png") 2x) 0 0, default;
+  }
+}
+
+/* Webkit-specific image-set support */
+@supports (cursor: -webkit-image-set(url("/cursor.png") 1x)) {
+  .cursor-default {
+    cursor: -webkit-image-set(url("/cursor.png") 1x, url("/cursor@2x.png") 2x) 0 0, default;
   }
 }
 
@@ -158,6 +163,7 @@
   --sh-entity: var(--rp-rose);
 }
 
+/* Custom pointer cursor for interactive elements */
 @media (hover: hover) and (pointer: fine) {
   a,
   button,
@@ -171,16 +177,43 @@
   .clickable,
   [data-clickable="true"],
   summary {
-    cursor: pointer;
-    cursor:
-      var(--cursor-pointer-1x) 6 0,
-      pointer;
-    cursor:
-      -webkit-image-set(var(--cursor-pointer-1x) 1x, var(--cursor-pointer-2x) 2x) 6 0,
-      pointer;
-    cursor:
-      image-set(var(--cursor-pointer-1x) 1x, var(--cursor-pointer-2x) 2x) 6 0,
-      pointer;
+    cursor: url("/pointer.png"), url("/pointer@2x.png"), pointer;
+  }
+
+  /* Modern browsers with image-set support */
+  @supports (cursor: image-set(url("/pointer.png") 1x)) {
+    a,
+    button,
+    [role="button"],
+    input[type="submit"],
+    input[type="button"],
+    select,
+    input[type="checkbox"],
+    input[type="radio"],
+    label[for],
+    .clickable,
+    [data-clickable="true"],
+    summary {
+      cursor: image-set(url("/pointer.png") 1x, url("/pointer@2x.png") 2x) 6 0, pointer;
+    }
+  }
+
+  /* Webkit-specific image-set support */
+  @supports (cursor: -webkit-image-set(url("/pointer.png") 1x)) {
+    a,
+    button,
+    [role="button"],
+    input[type="submit"],
+    input[type="button"],
+    select,
+    input[type="checkbox"],
+    input[type="radio"],
+    label[for],
+    .clickable,
+    [data-clickable="true"],
+    summary {
+      cursor: -webkit-image-set(url("/pointer.png") 1x, url("/pointer@2x.png") 2x) 6 0, pointer;
+    }
   }
 }
 
@@ -188,16 +221,16 @@
 
 html {
   color-scheme: light;
+  min-width: 360px;
 }
 
-:root html {
-  min-width: 360px;
+html.dark {
+  color-scheme: dark;
 }
 
 p,
 ul {
   text-wrap: pretty;
-  color: var(--text-primary);
   line-height: 1.7em;
   letter-spacing: -0.015em;
   margin-top: 0;
@@ -231,9 +264,7 @@ ul {
 }
 
 *::-webkit-scrollbar-track {
-  image-rendering: optimizeSpeed;
   image-rendering: pixelated;
-  image-rendering: optimize-contrast;
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgLTAuNSAyIDIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyI+CjxtZXRhZGF0YT5NYWRlIHdpdGggUGl4ZWxzIHRvIFN2ZyBodHRwczovL2NvZGVwZW4uaW8vc2hzaGF3L3Blbi9YYnh2Tmo8L21ldGFkYXRhPgo8cGF0aCBzdHJva2U9IiNjMGMwYzAiIGQ9Ik0wIDBoMU0xIDFoMSIgLz4KPC9zdmc+");
   background-position: 0 0;
   background-repeat: repeat;
@@ -311,11 +342,11 @@ ul {
 }
 
 .prose a {
-  @apply underline transition-all decoration-slate-400 underline-offset-2 decoration-[0.1em];
+  @apply underline transition-all underline-offset-2 decoration-[0.1em] text-foreground/90 hover:text-foreground;
 }
 
 .prose .anchor:after {
-  @apply text-slate-300;
+  @apply text-muted-foreground;
   content: "#";
 }
 
@@ -343,7 +374,7 @@ ul {
 }
 
 .prose p {
-  @apply text-slate-800;
+  @apply text-foreground/90;
 }
 
 .prose h1 {
@@ -391,7 +422,7 @@ pre {
       @apply relative min-w-max px-1.5;
 
       &:before {
-        @apply mr-6 inline-block w-5 text-right text-gray-400 tabular-nums;
+        @apply mr-6 inline-block w-5 text-right text-muted-foreground tabular-nums;
         counter-increment: sh-line-number 1;
         content: counter(sh-line-number);
       }
@@ -441,7 +472,7 @@ table {
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground dark:bg-background;
   }
 
   /* Ensure headings inside sectioning content have an explicit font-size
