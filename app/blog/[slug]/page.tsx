@@ -69,7 +69,11 @@ export default async function Blog(props) {
     <>
       <section className="grid-parent">
         <div className="grid-child-center">
-          <TitleSection title={post.metadata.title} subtitle={post.metadata.subtitle} publishedAt={post.metadata.publishedAt} />
+          <TitleSection
+            title={post.metadata.title}
+            subtitle={post.metadata.subtitle}
+            publishedAt={post.metadata.publishedAt}
+          />
         </div>
       </section>
       <section className="grid-parent prose">
@@ -95,7 +99,9 @@ export default async function Blog(props) {
             }),
           }}
         />
-        <p className="text-lg sm:text-xl grid-child-left font-mondwest text-muted-foreground">{formatDate(post.metadata.publishedAt)}</p>
+        <p className="text-lg sm:text-xl grid-child-left font-mondwest text-muted-foreground">
+          {formatDate(post.metadata.publishedAt)}
+        </p>
         <div className="grid-child-center">
           <article>
             <CustomMDX source={post.content} />
@@ -127,9 +133,7 @@ function TitleSection({ title, subtitle: subtitleFromMeta, publishedAt }) {
       <div className="flex justify-center items-center h-36 sm:h-[25rem]">
         <div className="flex flex-col items-center gap-2">
           <h1 className="text-7xl sm:text-8xl font-mondwest text-balance text-center text-foreground">{mainTitle}</h1>
-          {subtitle && (
-            <p className="text-base sm:text-lg font-nb-architect text-muted-foreground text-center max-w-prose">{subtitle}</p>
-          )}
+          {subtitle && <p className="text-base sm:text-lg font-nb-architect text-center max-w-prose">{subtitle}</p>}
         </div>
       </div>
     </div>

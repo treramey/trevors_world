@@ -58,7 +58,7 @@ export const CodeBlock = memo(({ title, code, ...props }: CodeBlockParams) => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -2 }}
               transition={{ duration: 0.3 }}
-              className="inline-flex gap-0.5 justify-center items-center w-14 z-2"
+              className="inline-flex gap-0.5 justify-center items-center w-14 z-2 text-black"
             >
               {useMemo(
                 () =>
