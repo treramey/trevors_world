@@ -5,11 +5,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Development Commands
 
 ### Core Commands
+
 - `pnpm dev` - Start development server with Turbopack
 - `pnpm build` - Build for production
 - `pnpm start` - Start production server
 
 ### Code Quality
+
 - Biome is used for linting, formatting, and import organization
 - Run `npx biome check` to check all files
 - Run `npx biome check --write` to automatically fix issues
@@ -18,6 +20,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Project Architecture
 
 This is a Next.js 15 portfolio blog built with:
+
 - **App Router** - All routes in `/app` directory
 - **React 19** with TypeScript 5.9
 - **Tailwind CSS v4** - Global styles in `app/global.css`
@@ -25,6 +28,7 @@ This is a Next.js 15 portfolio blog built with:
 - **pnpm** - Package management (pinned to 10.14.0)
 
 ### Key Structure
+
 - `/app` - Next.js app router pages and components
   - `/blog` - Blog functionality with MDX support
   - `/components` - Shared UI components
@@ -34,6 +38,7 @@ This is a Next.js 15 portfolio blog built with:
 - `/public` - Static assets including custom fonts and sounds
 
 ### Blog System
+
 - MDX files stored in `app/blog/posts/`
 - Frontmatter parsing with metadata (title, publishedAt, summary, image)
 - Blog utilities in `app/blog/utils.ts` handle file reading and date formatting
@@ -41,12 +46,14 @@ This is a Next.js 15 portfolio blog built with:
 - Dynamic OG image generation at `/og`
 
 ### Custom Features
+
 - **Sound effects** - Howler.js integration with mouse click sounds
 - **Custom fonts** - NBArchitekt, Mondwest, and NeueKit locally hosted
 - **CRT aesthetic** - Background gradients and scan line overlays
 - **Retro styling** - Custom cursor and pointer images in `/public`
 
 ### SEO & Analytics
+
 - Vercel Analytics and Speed Insights integrated
 - Sitemap generation in `app/sitemap.ts`
 - Robots.txt in `app/robots.ts`

@@ -2,7 +2,6 @@
 
 @plugin 'tailwindcss-animate';
 
-
 :root {
   /* Rosé Pine palette */
   --rp-base: #191724;
@@ -139,14 +138,18 @@
 /* Modern browsers with image-set support */
 @supports (cursor: image-set(url("/cursor.png") 1x)) {
   .cursor-default {
-    cursor: image-set(url("/cursor.png") 1x, url("/cursor@2x.png") 2x) 0 0, default;
+    cursor:
+      image-set(url("/cursor.png") 1x, url("/cursor@2x.png") 2x) 0 0,
+      default;
   }
 }
 
 /* Webkit-specific image-set support */
 @supports (cursor: -webkit-image-set(url("/cursor.png") 1x)) {
   .cursor-default {
-    cursor: -webkit-image-set(url("/cursor.png") 1x, url("/cursor@2x.png") 2x) 0 0, default;
+    cursor:
+      -webkit-image-set(url("/cursor.png") 1x, url("/cursor@2x.png") 2x) 0 0,
+      default;
   }
 }
 
@@ -194,7 +197,9 @@
     .clickable,
     [data-clickable="true"],
     summary {
-      cursor: image-set(url("/pointer.png") 1x, url("/pointer@2x.png") 2x) 6 0, pointer;
+      cursor:
+        image-set(url("/pointer.png") 1x, url("/pointer@2x.png") 2x) 6 0,
+        pointer;
     }
   }
 
@@ -212,7 +217,9 @@
     .clickable,
     [data-clickable="true"],
     summary {
-      cursor: -webkit-image-set(url("/pointer.png") 1x, url("/pointer@2x.png") 2x) 6 0, pointer;
+      cursor:
+        -webkit-image-set(url("/pointer.png") 1x, url("/pointer@2x.png") 2x) 6 0,
+        pointer;
     }
   }
 }

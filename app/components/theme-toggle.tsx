@@ -21,16 +21,10 @@ export function ThemeToggle() {
         className="flex justify-center items-center hover:cursor-pointer relative size-8 z-20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 rounded-full"
         aria-pressed={isDark}
       >
-        {mounted && (isDark ? (
-          <Moon className="w-5 h-5" />
-        ) : (
-          <Sun className="w-5 h-5" />
-        ))}
+        {mounted && (isDark ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />)}
       </button>
     </div>
   );
 }
 
 export default ThemeToggle;
-
-

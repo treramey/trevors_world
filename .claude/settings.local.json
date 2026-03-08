@@ -1,10 +1,6 @@
 {
   "permissions": {
-    "allow": [
-      "WebFetch(domain:biomejs.dev)",
-      "Bash(npx biome check:*)",
-      "Bash(tree:*)"
-    ],
+    "allow": ["WebFetch(domain:biomejs.dev)", "Bash(npx biome check:*)", "Bash(tree:*)"],
     "deny": []
   }
 }

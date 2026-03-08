@@ -5,6 +5,7 @@
 **Project Purpose**: A personal portfolio and blog website showcasing Trevor's software development work, projects, and technical writing.
 
 **Primary Technologies**:
+
 - **Frontend Framework**: Next.js 15 with App Router
 - **UI Framework**: React 19
 - **Styling**: Tailwind CSS v4 with custom Rosé Pine color palette
@@ -14,6 +15,7 @@
 - **Component Library**: Shadcn/ui components with Radix UI primitives
 
 **Key Dependencies**:
+
 - `next` (15.4.6) - React framework
 - `react` (19.1.1) - UI library
 - `tailwindcss` (4.1.11) - CSS framework
@@ -71,6 +73,7 @@ trevors_world/
 ```
 
 **Configuration Files**:
+
 - `biome.json`: Code linting, formatting, and import organization rules
 - `next.config.ts`: Next.js optimization settings and experimental features
 - `components.json`: Shadcn/ui component library configuration
@@ -78,6 +81,7 @@ trevors_world/
 - `postcss.config.js`: PostCSS processing for Tailwind CSS
 
 **Entry Points**:
+
 - `app/layout.tsx`: Root layout with global styles and providers
 - `app/page.tsx`: Homepage with portfolio content
 - `app/blog/page.tsx`: Blog listing page
@@ -91,7 +95,7 @@ graph TB
         Browser[Web Browser]
         PWA[Progressive Web App]
     end
-    
+
     subgraph "Presentation Layer"
         Layout[Root Layout]
         HomePage[Home Page]
@@ -100,7 +104,7 @@ graph TB
         Nav[Navigation]
         Footer[Footer]
     end
-    
+
     subgraph "Component Layer"
         RetroCard[Retro Card]
         CodeBlock[Code Block]
@@ -108,58 +112,58 @@ graph TB
         MDXRenderer[MDX Renderer]
         SoundHandler[Sound Handler]
     end
-    
+
     subgraph "Hook Layer"
         useSound[useSound Hook]
         useClick[useClick Hook]
     end
-    
+
     subgraph "Data Layer"
         BlogUtils[Blog Utils]
         MDXFiles[(MDX Files)]
         StaticAssets[(Static Assets)]
     end
-    
+
     subgraph "API Routes"
         OGRoute[OG Image API]
         RSSRoute[RSS Feed API]
         Sitemap[Sitemap API]
     end
-    
+
     subgraph "External Services"
         VercelAnalytics[Vercel Analytics]
         VercelInsights[Vercel Speed Insights]
         HowlerJS[Howler.js Audio]
     end
-    
+
     Browser --> Layout
     Layout --> HomePage
     Layout --> BlogPage
     Layout --> PostPage
     Layout --> Nav
     Layout --> Footer
-    
+
     HomePage --> RetroCard
     HomePage --> PostList
     BlogPage --> PostList
     PostPage --> MDXRenderer
     PostPage --> CodeBlock
-    
+
     PostList --> BlogUtils
     MDXRenderer --> BlogUtils
     BlogUtils --> MDXFiles
-    
+
     SoundHandler --> useClick
     useClick --> useSound
     useSound --> HowlerJS
-    
+
     Layout --> VercelAnalytics
     Layout --> VercelInsights
-    
+
     OGRoute --> Browser
     RSSRoute --> Browser
     Sitemap --> Browser
-    
+
     RetroCard --> StaticAssets
     CodeBlock --> StaticAssets
 ```
@@ -169,16 +173,19 @@ graph TB
 ### Core Components
 
 **Layout (`app/layout.tsx`)**
+
 - **Responsibility**: Root application layout, font loading, analytics integration
 - **Dependencies**: Local fonts, Vercel analytics, global CSS
 - **Key Features**: Custom font variables, CRT aesthetic overlays, responsive design
 
 **Navigation (`app/components/nav.tsx`)**
+
 - **Responsibility**: Site navigation with retro styling
 - **API**: Simple nav items object with paths and labels
 - **Dependencies**: Next.js Link, Tailwind classes
 
 **Blog System (`app/blog/utils.ts`)**
+
 - **Responsibility**: MDX file processing, frontmatter parsing, post management
 - **Public Interface**:
   - `getBlogPosts()`: Returns sorted blog posts
@@ -187,18 +194,21 @@ graph TB
 - **Patterns**: Factory pattern for post creation, caching for performance
 
 **MDX Renderer (`app/components/mdx.tsx`)**
+
 - **Responsibility**: Custom MDX component overrides and rendering
 - **Public Interface**: `CustomMDX` component with props
 - **Dependencies**: next-mdx-remote, custom components
 - **Features**: Custom link handling, image optimization, code block styling
 
 **Sound System (`app/hooks/useSound.tsx`)**
+
 - **Responsibility**: Audio management with accessibility considerations
 - **Public Interface**: `useSound(src, options)` hook
 - **Dependencies**: Howler.js (lazy loaded)
 - **Features**: Prefers-reduced-motion support, dynamic loading
 
 **RetroCard (`app/components/retroCard.tsx`)**
+
 - **Responsibility**: Styled container with retro 3D border effect
 - **API**: `children` and optional `className` props
 - **Dependencies**: Utility class merger
@@ -207,11 +217,13 @@ graph TB
 ### Utility Modules
 
 **Class Utilities (`lib/utils.ts`)**
+
 - **Responsibility**: Tailwind class name merging and conflict resolution
 - **Dependencies**: clsx, tailwind-merge
 - **Pattern**: Higher-order utility function
 
 **Button Component (`components/ui/button.tsx`)**
+
 - **Responsibility**: Reusable button component with multiple variants
 - **Dependencies**: Radix UI Slot, class-variance-authority
 - **Variants**: default, destructive, outline, secondary, ghost, link, aquaBlue, aquaGrey
@@ -227,13 +239,13 @@ classDiagram
         +string summary
         +string? image
     }
-    
+
     class BlogPost {
         +Metadata metadata
         +string slug
         +string content
     }
-    
+
     class SoundHookOptions {
         +string? id
         +number volume
@@ -243,26 +255,26 @@ classDiagram
         +SpriteMap? sprite
         +function? onload
     }
-    
+
     class ReturnedValue {
         +PlayFunction play
         +ExposedData data
     }
-    
+
     class ExposedData {
         +Howl? sound
         +function stop
         +function pause
         +number? duration
     }
-    
+
     class ButtonProps {
         +VariantProps variant
         +VariantProps size
         +boolean asChild
         +ComponentProps props
     }
-    
+
     class MDXComponents {
         +Component h1-h6
         +Component Image
@@ -270,11 +282,11 @@ classDiagram
         +Component Code
         +Component Table
     }
-    
+
     BlogPost *-- Metadata
     ReturnedValue *-- ExposedData
     ButtonProps --|> ComponentProps
-    
+
     useSound ..> SoundHookOptions : uses
     useSound ..> ReturnedValue : returns
     CustomMDX ..> MDXComponents : renders
@@ -292,7 +304,7 @@ sequenceDiagram
     participant FileSystem
     participant MDXRenderer
     participant Browser
-    
+
     User->>NextJS: Request /blog/[slug]
     NextJS->>BlogUtils: getBlogPosts()
     BlogUtils->>FileSystem: Read MDX files
@@ -317,7 +329,7 @@ sequenceDiagram
     participant useClick
     participant useSound
     participant Howler
-    
+
     User->>Browser: Pointer down event
     Browser->>MouseClick: Event captured
     MouseClick->>useClick: Check motion preference
@@ -341,7 +353,7 @@ sequenceDiagram
     participant BlogUtils
     participant FileSystem
     participant Vercel
-    
+
     BuildProcess->>NextJS: Build command
     NextJS->>BlogUtils: generateStaticParams()
     BlogUtils->>FileSystem: Scan MDX files
@@ -363,64 +375,64 @@ graph TD
         BlogListPage[Blog List]
         BlogPostPage[Blog Post]
     end
-    
+
     subgraph "Shared Components"
         Layout[Layout]
         Nav[Navigation]
         Footer[Footer]
         RetroCard[Retro Card]
     end
-    
+
     subgraph "Blog System"
         BlogUtils[Blog Utils]
         PostsList[Posts List]
         MDXRenderer[MDX Renderer]
         CodeBlock[Code Block]
     end
-    
+
     subgraph "Interactive Features"
         SoundSystem[Sound System]
         MouseClick[Mouse Click Handler]
     end
-    
+
     subgraph "API Routes"
         OGImage[OG Image Generator]
         RSSFeed[RSS Feed]
         SitemapGen[Sitemap Generator]
     end
-    
+
     subgraph "Utilities"
         ClassUtils[Class Utils]
         DateUtils[Date Utils]
     end
-    
+
     HomePage --> Layout
     BlogListPage --> Layout
     BlogPostPage --> Layout
-    
+
     Layout --> Nav
     Layout --> Footer
     Layout --> SoundSystem
-    
+
     HomePage --> PostsList
     HomePage --> RetroCard
     BlogListPage --> PostsList
     BlogPostPage --> MDXRenderer
-    
+
     PostsList --> BlogUtils
     MDXRenderer --> BlogUtils
     MDXRenderer --> CodeBlock
     CodeBlock --> RetroCard
-    
+
     SoundSystem --> MouseClick
-    
+
     BlogUtils --> DateUtils
     RetroCard --> ClassUtils
-    
+
     OGImage -.-> BlogUtils
     RSSFeed -.-> BlogUtils
     SitemapGen -.-> BlogUtils
-    
+
     BlogPostPage -.-> OGImage
 ```
 
@@ -433,17 +445,17 @@ This application uses a **file-based content management system** with MDX files:
 ```typescript
 // Blog Post Frontmatter Schema
 interface BlogPostMetadata {
-  title: string;           // Post title
-  publishedAt: string;     // ISO date string
-  summary: string;         // Brief description
-  image?: string;          // Optional cover image path
+  title: string; // Post title
+  publishedAt: string; // ISO date string
+  summary: string; // Brief description
+  image?: string; // Optional cover image path
 }
 
 // File Structure Schema
 interface BlogPost {
   metadata: BlogPostMetadata;
-  slug: string;           // Derived from filename
-  content: string;        // Raw MDX content
+  slug: string; // Derived from filename
+  content: string; // Raw MDX content
 }
 ```
 
@@ -462,20 +474,20 @@ erDiagram
     BlogPost ||--|| Metadata : contains
     BlogPost ||--o{ StaticAsset : references
     BlogPost }o--|| Slug : identified-by
-    
+
     BlogPost {
         string slug PK
         string content
         Metadata metadata
     }
-    
+
     Metadata {
         string title
         date publishedAt
         string summary
         string image FK
     }
-    
+
     StaticAsset {
         string path PK
         string type
@@ -488,6 +500,7 @@ erDiagram
 ### Internal API Routes
 
 #### OG Image Generation (`/og`)
+
 - **Method**: GET
 - **Parameters**: `title` (query string)
 - **Response**: Dynamic PNG image (1200x630)
@@ -495,12 +508,14 @@ erDiagram
 - **Example**: `/og?title=My%20Blog%20Post`
 
 #### RSS Feed (`/rss`)
+
 - **Method**: GET
 - **Response**: XML RSS feed
 - **Content**: All published blog posts
 - **Headers**: `Content-Type: application/rss+xml`
 
 #### Sitemap (`/sitemap.xml`)
+
 - **Method**: GET
 - **Response**: XML sitemap
 - **Content**: Static routes + dynamic blog posts
@@ -509,6 +524,7 @@ erDiagram
 ### Component APIs
 
 #### useSound Hook
+
 ```typescript
 function useSound(
   src: string | string[],
@@ -518,13 +534,14 @@ function useSound(
     soundEnabled?: boolean;
     interrupt?: boolean;
     onload?: () => void;
-  }
-): [PlayFunction, ExposedData]
+  },
+): [PlayFunction, ExposedData];
 ```
 
 #### getBlogPosts Function
+
 ```typescript
-function getBlogPosts(): BlogPost[]
+function getBlogPosts(): BlogPost[];
 // Returns sorted array of blog posts by publication date
 ```
 
@@ -538,18 +555,18 @@ function parseFrontmatter(fileContent: string) {
   // 1. Extract frontmatter block using regex
   let frontmatterRegex = /---\s*([\s\S]*?)\s*---/;
   let match = frontmatterRegex.exec(fileContent);
-  
+
   // 2. Parse YAML-like key-value pairs
   let frontMatterLines = frontMatterBlock.trim().split("\n");
   let metadata = {};
-  
+
   frontMatterLines.forEach((line) => {
     let [key, ...valueArr] = line.split(": ");
     let value = valueArr.join(": ").trim();
     value = value.replace(/^['"](.*)['"]$/, "$1"); // Remove quotes
     metadata[key.trim()] = value;
   });
-  
+
   // 3. Return separated metadata and content
   return { metadata, content };
 }
@@ -558,6 +575,7 @@ function parseFrontmatter(fileContent: string) {
 ### Sound Interaction Logic
 
 Key algorithm for accessible sound interactions:
+
 1. **Motion Preference Check**: Respects `prefers-reduced-motion`
 2. **Lazy Loading**: Only loads Howler.js when needed
 3. **Event Deduplication**: Filters non-mouse pointer events
@@ -566,8 +584,9 @@ Key algorithm for accessible sound interactions:
 ### Date Formatting Algorithm
 
 Implements relative date display:
+
 - Years ago: "2y ago"
-- Months ago: "3mo ago"  
+- Months ago: "3mo ago"
 - Days ago: "5d ago"
 - Today: "Today"
 
@@ -576,6 +595,7 @@ Implements relative date display:
 **Current Testing Status**: No formal test suite identified in the codebase.
 
 **Recommended Testing Approach**:
+
 - **Unit Tests**: Blog utility functions, date formatting, sound hooks
 - **Component Tests**: React components with React Testing Library
 - **Integration Tests**: Blog post rendering, navigation flows
@@ -583,6 +603,7 @@ Implements relative date display:
 - **Performance Tests**: Core Web Vitals monitoring via Vercel Insights
 
 **Testing Tools Suggested**:
+
 - Vitest for unit/integration tests
 - React Testing Library for component tests
 - Playwright for E2E testing
@@ -625,8 +646,9 @@ Implements relative date display:
 ```typescript
 // React cache for blog posts
 export const getBlogPosts = cache(function getBlogPosts() {
-  return getMDXData(path.join(process.cwd(), "app", "blog", "posts"))
-    .sort((a, b) => new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt) ? -1 : 1);
+  return getMDXData(path.join(process.cwd(), "app", "blog", "posts")).sort((a, b) =>
+    new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt) ? -1 : 1,
+  );
 });
 ```
 
@@ -678,6 +700,7 @@ pnpm start          # Start production server
 ### Code Style Guidelines
 
 From `biome.json`:
+
 - 2-space indentation
 - 120 character line width
 - Automatic import organization
