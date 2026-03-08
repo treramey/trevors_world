@@ -1,6 +1,6 @@
-import { formatDate, getBlogPosts } from "app/blog/utils";
+import { formatDate, getBlogPosts, type Metadata } from "app/blog/utils";
 import { CustomMDX } from "app/components/mdx";
-import { baseUrl } from "app/sitemap";
+import { baseUrl, siteConfig } from "app/config";
 import { notFound } from "next/navigation";
 
 export const dynamic = "force-static";
@@ -13,7 +13,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata(props) {
+type BlogParams = Promise<{ slug: string }>;
+
+export async function generateMetadata(props: { params: BlogParams }) {
   const params = await props.params;
   const post = getBlogPosts().find((post) => post.slug === params.slug);
   if (!post) {
@@ -54,10 +56,13 @@ function splitTitle(title: string): { mainTitle: string; subtitle?: string } {
   }
   const mainTitle = title.slice(0, i).trim();
   const subtitle = title.slice(i + 1).trim();
-  return { mainTitle: mainTitle || title.trim(), subtitle: subtitle || undefined };
+  return {
+    mainTitle: mainTitle || title.trim(),
+    subtitle: subtitle || undefined,
+  };
 }
 
-export default async function Blog(props) {
+export default async function Blog(props: { params: BlogParams }) {
   const params = await props.params;
   const post = getBlogPosts().find((post) => post.slug === params.slug);
 
@@ -94,7 +99,7 @@ export default async function Blog(props) {
               url: `${baseUrl}/blog/${post.slug}`,
               author: {
                 "@type": "Person",
-                name: "My Portfolio",
+                name: siteConfig.author.name,
               },
             }),
           }}
@@ -112,7 +117,15 @@ export default async function Blog(props) {
   );
 }
 
-function TitleSection({ title, subtitle: subtitleFromMeta, publishedAt }) {
+function TitleSection({
+  title,
+  subtitle: subtitleFromMeta,
+  publishedAt,
+}: {
+  title: string;
+  subtitle?: string;
+  publishedAt: string;
+}) {
   if (!title) {
     return null;
   }
@@ -125,10 +138,6 @@ function TitleSection({ title, subtitle: subtitleFromMeta, publishedAt }) {
   const subtitle = subtitleFromMeta ?? subtitleFromTitle;
 
   return (
-    // {/* <div className="mb-20 text-slate-800"> */}
-    // {/*   <h1 className="mb-0 text-5xl sm:text-7xl font-mondwest">{title}</h1> */}
-    // {/*   <h2 className="mt-0.5 text-base font-normal opacity-50 font-nb-architect-neue">{formatDate(publishedAt)}</h2> */}
-    // {/* </div> */}
     <div className="grid-child-center">
       <div className="flex justify-center items-center h-36 sm:h-[25rem]">
         <div className="flex flex-col items-center gap-2">

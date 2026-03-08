@@ -1,5 +1,3 @@
-import type { Metadata } from "app/blog/utils";
-
 import { formatDate, getBlogPosts } from "app/blog/utils";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -50,7 +48,11 @@ export function ListAllBlogPosts() {
 
 type BlogPostProps = {
   post: {
-    metadata: Metadata;
+    metadata: {
+      title?: string;
+      publishedAt?: string;
+      summary?: string;
+    };
     slug: string;
     content: string;
   };

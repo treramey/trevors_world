@@ -5,7 +5,7 @@ type SpriteMap = {
   [key: string]: [number, number];
 };
 
-type HookOptions<T = any> = T & {
+type HookOptions = {
   id?: string;
   volume?: number;
   playbackRate?: number;
@@ -16,7 +16,7 @@ type HookOptions<T = any> = T & {
 };
 
 interface PlayOptions {
-  id?: string;
+  id?: number;
   forceSoundEnabled?: boolean;
   playbackRate?: number;
 }
@@ -25,52 +25,39 @@ type PlayFunction = (options?: PlayOptions) => void;
 
 interface ExposedData {
   sound: Howl | null;
-  stop: (id?: string) => void;
-  pause: (id?: string) => void;
+  stop: (id?: number) => void;
+  pause: (id?: number) => void;
   duration: number | null;
 }
 
 export type ReturnedValue = [PlayFunction, ExposedData];
 
-export function useOnMount(callback: React.EffectCallback) {
-  React.useEffect(callback, []);
-}
-
-export default function useSound<T = any>(
+export default function useSound(
   src: string | string[],
-  {
-    id,
-    volume = 1,
-    playbackRate = 1,
-    soundEnabled = true,
-    interrupt = false,
-    onload,
-    ...delegated
-  }: HookOptions<T> = {} as HookOptions,
+  { volume = 1, playbackRate = 1, soundEnabled = true, interrupt = false, onload, ...delegated }: HookOptions = {},
 ) {
   const HowlConstructor = React.useRef<typeof Howl | null>(null);
   const isMounted = React.useRef(false);
+  const soundRef = React.useRef<Howl | null>(null);
 
   const [duration, setDuration] = React.useState<number | null>(null);
-
   const [sound, setSound] = React.useState<Howl | null>(null);
 
-  const handleLoad = function () {
-    if (typeof onload === "function") {
-      // @ts-ignore
-      onload.call(this);
-    }
+  const handleLoad = React.useCallback(
+    (howlInstance: Howl) => {
+      if (typeof onload === "function") {
+        onload();
+      }
 
-    if (isMounted.current) {
-      // @ts-ignore
-      setDuration(this.duration() * 1000);
-    }
+      if (isMounted.current) {
+        setDuration(howlInstance.duration() * 1000);
+      }
 
-    // @ts-ignore
-    setSound(this);
-  };
+      setSound(howlInstance);
+    },
+    [onload],
+  );
 
-  // Defer loading Howler and constructing the sound until enabled
   React.useEffect(() => {
     if (!soundEnabled) {
       return;
@@ -78,54 +65,45 @@ export default function useSound<T = any>(
     let disposed = false;
     const load = async () => {
       const mod = await import("howler");
-      if (disposed) return;
+      if (disposed) {
+        return;
+      }
       HowlConstructor.current = mod.Howl ?? mod.default.Howl;
       isMounted.current = true;
-      setSound(
-        new HowlConstructor.current({
-          src: Array.isArray(src) ? src : [src],
-          volume,
-          rate: playbackRate,
-          onload: handleLoad,
-          ...delegated,
-        }),
-      );
+      const howlInstance = new HowlConstructor.current({
+        src: Array.isArray(src) ? src : [src],
+        volume,
+        rate: playbackRate,
+        onload: () => handleLoad(howlInstance),
+        ...delegated,
+      });
+      soundRef.current = howlInstance;
     };
     void load();
     return () => {
       disposed = true;
       isMounted.current = false;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [soundEnabled]);
 
-  // When the `src` changes, we have to do a whole thing where we recreate
-  // the Howl instance. This is because Howler doesn't expose a way to
-  // tweak the sound
   React.useEffect(() => {
     if (!soundEnabled) {
       return;
     }
     if (HowlConstructor.current && sound) {
-      setSound(
-        new HowlConstructor.current({
-          src: Array.isArray(src) ? src : [src],
-          volume,
-          onload: handleLoad,
-          ...delegated,
-        }),
-      );
+      const howlInstance = new HowlConstructor.current({
+        src: Array.isArray(src) ? src : [src],
+        volume,
+        onload: () => handleLoad(howlInstance),
+        ...delegated,
+      });
+      soundRef.current = howlInstance;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [soundEnabled, JSON.stringify(src)]);
 
-  // Whenever volume/playbackRate are changed, change those properties
-  // on the sound instance.
   React.useEffect(() => {
     if (sound) {
       sound.volume(volume);
-
-      // HACK: When a sprite is defined, `sound.rate()` throws an error, because Howler tries to reset the "_default" sprite, which doesn't exist. This is likely a bug within Howler, but I don’t have the bandwidth to investigate, so instead, we’re ignoring playbackRate changes when a sprite is defined.
       if (!delegated.sprite) {
         sound.rate(playbackRate);
       }
@@ -152,7 +130,7 @@ export default function useSound<T = any>(
   );
 
   const stop = React.useCallback(
-    (id) => {
+    (id?: number) => {
       if (!sound) {
         return;
       }
@@ -162,7 +140,7 @@ export default function useSound<T = any>(
   );
 
   const pause = React.useCallback(
-    (id) => {
+    (id?: number) => {
       if (!sound) {
         return;
       }

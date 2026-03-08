@@ -6,10 +6,10 @@ import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import { Suspense } from "react";
 import { MouseClick } from "./components/click";
-import { ThemeProvider } from "./providers";
 import Footer from "./components/footer";
 import { Navbar } from "./components/nav";
-import { baseUrl } from "./sitemap";
+import { baseUrl, siteConfig } from "./config";
+import { ThemeProvider } from "./providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -93,15 +93,15 @@ const neueBit = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "Trevor's world",
-    template: "%s | Trevor's world",
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.title}`,
   },
-  description: "This is my portfolio.",
+  description: siteConfig.description,
   openGraph: {
-    title: "Trevor's world",
-    description: "This is my portfolio.",
+    title: siteConfig.title,
+    description: siteConfig.description,
     url: baseUrl,
-    siteName: "Trevor's world",
+    siteName: siteConfig.title,
     locale: "en_US",
     type: "website",
   },
